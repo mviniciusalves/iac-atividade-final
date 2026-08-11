@@ -9,18 +9,23 @@ variable "instance_type" {
   default = "t3.micro"
 }
 
-variable "my_ip_cidr" {
+variable "meu_ip_cidr" {
   description = "CIDR do seu IP publico, no formato IP/32, autorizado a acessar a porta 22"
   type        = string
   default     = "192.168.1.1/32"
 }
 
-variable "name" {
+variable "aluno_name" {
   type        = string
   default = "Marcos Vinicius"
 }
 
-variable "class" {
+variable "turma" {
   type        = string
   default = "Turma-IaC"
+}
+
+variable "project_name" {
+  type    = string
+  default = "atividade-web"
 }

@@ -21,6 +21,10 @@ data "aws_ami" "amazon_linux_2023" {
   }
 }
 
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
 
@@ -39,12 +43,13 @@ resource "aws_internet_gateway" "main" {
 
 resource "aws_subnet" "public" {
   vpc_id                  = aws_vpc.main.id
+  availability_zone       = data.aws_availability_zones.available.names[0]
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
 
-  tags = merge(local.common_tags, {
-    Name = "subnet-publica-atividade-web-${terraform.workspace}"
-  })
+  tags = {
+    Name = "subnet-publica-atividade-web"
+  }
 }
 
 resource "aws_route_table" "public" {

@@ -14,29 +14,11 @@ pos-devops-iac-tfstate-marcos
 
    terraform init
 
-2. Crie/selecionar workspaces:
-
-   terraform workspace new dev
-   terraform workspace select dev
-
-   terraform workspace new prod
-   terraform workspace select prod
-
-3. Rode o plano e aplique:
+2. Rode o plano e aplique:
 
    terraform plan
    terraform apply
 
-4. Acesse a pagina web usando o output `web_url`:
-
-   terraform output web_url
-
 ## Destruir recursos
 
-Para destruir em cada workspace:
-
-   terraform workspace select dev
-   terraform destroy
-
-   terraform workspace select prod
    terraform destroy
