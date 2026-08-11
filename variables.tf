@@ -4,18 +4,23 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "meu_ip_cidr" {
+variable "instance_type" {
+  type    = string
+  default = "t3.micro"
+}
+
+variable "my_ip_cidr" {
   description = "CIDR do seu IP publico, no formato IP/32, autorizado a acessar a porta 22"
   type        = string
   default     = "192.168.1.1/32"
 }
 
-variable "aluno_nome" {
+variable "name" {
   type        = string
   default = "Marcos Vinicius"
 }
 
-variable "turma" {
+variable "class" {
   type        = string
   default = "Turma-IaC"
 }
