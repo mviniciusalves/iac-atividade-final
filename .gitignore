@@ -45,10 +45,3 @@ terraform.rc
 # Optional: ignore plan files saved before destroying Terraform configuration
 # Uncomment the line below if you want to ignore planout files.
 # planout
-
-exercicio-01.yml
-exercicio-02.yml
-exercicio-03.yml
-exercicio-04.yml
-exercicio-05.yml
-exercicio-06.yml
