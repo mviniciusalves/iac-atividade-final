@@ -22,3 +22,5 @@ pos-devops-iac-tfstate-marcos
 ## Destruir recursos
 
    terraform destroy
+
+---
