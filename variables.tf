@@ -27,7 +27,7 @@ variable "turma" {
 
 variable "project_name" {
   type    = string
-  default = "atividade-web"
+  default = "getting-started-app"
 }
 variable "key_name" {
   description = "getting-started-app"

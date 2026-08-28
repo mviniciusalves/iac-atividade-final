@@ -1,6 +1,6 @@
 locals {
   common_tags = {
-    Name     = "atividade-web-${terraform.workspace}"
+    Name     = "getting-started-app-${terraform.workspace}"
     Project  = var.project_name
     Ambiente = terraform.workspace
   }
@@ -29,7 +29,7 @@ resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
 
   tags = merge(local.common_tags, {
-    Name = "vpc-atividade-web-${terraform.workspace}"
+    Name = "vpc-getting-started-app-${terraform.workspace}"
   })
 }
 
@@ -37,7 +37,7 @@ resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
   tags = merge(local.common_tags, {
-    Name = "igw-atividade-web-${terraform.workspace}"
+    Name = "igw-getting-started-app-${terraform.workspace}"
   })
 }
 
@@ -48,7 +48,7 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "subnet-publica-atividade-web"
+    Name = "subnet-publica-getting-started-app"
   }
 }
 
@@ -61,7 +61,7 @@ resource "aws_route_table" "public" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "rt-public-atividade-web-${terraform.workspace}"
+    Name = "rt-public-getting-started-app-${terraform.workspace}"
   })
 }
 
@@ -84,9 +84,9 @@ resource "aws_security_group" "web" {
   }
 
   ingress {
-    description = "HTTP publico"
-    from_port   = 80
-    to_port     = 80
+    description = "Aplicacao getting-started-app"
+    from_port   = 3000
+    to_port     = 3000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -99,7 +99,7 @@ resource "aws_security_group" "web" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "sg-web-atividade-web-${terraform.workspace}"
+    Name = "sg-web-getting-started-app-${terraform.workspace}"
   })
 }
 
@@ -109,24 +109,14 @@ resource "aws_instance" "web" {
   subnet_id                   = aws_subnet.public.id
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.web.id]
-
-  user_data = <<-EOF
-    #!/bin/bash
-    dnf install -y httpd
-    systemctl enable httpd
-    systemctl start httpd
-    cat <<HTML > /var/www/html/index.html
-    <html>
-    <body>
-    <h1>Atividade Terraform</h1>
-    <p>Aluno: ${var.aluno_nome}</p>
-    <p>Turma: ${var.turma}</p>
-    </body>
-    </html>
-    HTML
-  EOF
+  key_name                    = aws_key_pair.web.key_name
 
   tags = merge(local.common_tags, {
-    Name = "ec2-web-atividade-web-${terraform.workspace}"
+    Name = "ec2-web-getting-started-app-${terraform.workspace}"
   })
+}
+
+resource "aws_key_pair" "web" {
+  key_name   = var.key_name
+  public_key = file(var.public_key_path)
 }

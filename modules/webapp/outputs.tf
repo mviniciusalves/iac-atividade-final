@@ -14,6 +14,6 @@ output "instance_public_dns" {
 }
 
 output "web_url" {
-  description = "URL de acesso publico para a pagina web."
-  value       = "http://${aws_instance.web.public_ip}"
+  description = "URL da aplicação"
+  value       = "http://${aws_instance.web.public_ip}:3000"
 }
