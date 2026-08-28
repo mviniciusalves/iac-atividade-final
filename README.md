@@ -1,30 +1,80 @@
-# iac-atividade-01
-Repositório para atividade 01 da disciplina IaC
+# Projeto Final: Terraform + Ansible
 
-Esta configuracao provisiona a infraestrutura minima na AWS para hospedar uma pagina web simples.
+Projeto para provisionamento e configuração de uma aplicação Docker na AWS.
 
-# Bucket
-O projeto deve declarar um backend s3 criado manualmente:
+## Fluxo
 
-pos-devops-iac-tfstate-marcos
+```text
+Terraform → EC2 → Ansible via SSH → Docker → Aplicação na porta 3000
+```
 
-## Como usar
+## Terraform
 
-1. Inicialize o projeto:
+Inicializar:
 
-   terraform init
+```bash
+terraform init
+```
 
-2. Rode o plano e aplique:
+Criar os ambientes:
 
-   terraform plan
-   terraform apply
+```bash
+terraform workspace new dev
+terraform workspace new prod
+terraform workspace select dev
+```
 
-## Destruir recursos
+Provisionar a infraestrutura:
 
-   terraform destroy
+```bash
+terraform validate
+terraform plan
+terraform apply
+```
 
-#Ansible
+O Terraform cria a VPC, subnet pública, Internet Gateway, Security Group, chave SSH e uma EC2 `t3.micro`.
 
-Inventário estático
-Se a instância for recriada e o IP mudar, atualize o endereço em ansible/inventory.ini.
----
+## Ansible
+
+Após o `terraform apply`, atualize o IP da EC2 (Ver em Outputs) em `ansible/inventory.ini`:
+
+```ini
+[web]
+app ansible_host=IP_PUBLICO_DA_EC2
+```
+
+Execute o playbook:
+
+```bash
+cd ansible
+ansible-playbook -i inventory.ini playbook.yml --ask-vault-pass
+```
+Vault password enviada via comentário privado no Classroom.
+O Ansible instala o Docker e executa o container `getting-started-app`, mapeando a porta `3000` da EC2 para a porta `80` do container.
+
+## Ansible Vault
+
+A variável sensível simulada está protegida no arquivo `ansible/vault.yml`.
+
+## Teste
+
+```bash
+curl http://IP_PUBLICO_DA_EC2:3000
+```
+
+A segunda execução do Ansible foi idempotente:
+
+```text
+changed=0
+failed=0
+```
+
+## Destruição
+
+```bash
+cd ..
+terraform workspace select dev
+terraform destroy
+```
+
+Os arquivos `terraform.tfvars`, a chave privada SSH e a senha do Vault não são enviados ao repositório.
