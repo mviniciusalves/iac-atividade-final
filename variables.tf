@@ -16,16 +16,25 @@ variable "meu_ip_cidr" {
 }
 
 variable "aluno_name" {
-  type        = string
+  type    = string
   default = "Marcos Vinicius"
 }
 
 variable "turma" {
-  type        = string
+  type    = string
   default = "Turma-IaC"
 }
 
 variable "project_name" {
   type    = string
   default = "atividade-web"
+}
+variable "key_name" {
+  description = "getting-started-app"
+  type        = string
+}
+
+variable "public_key_path" {
+  description = "/home/marcos/.ssh/getting-started-app.pub"
+  type        = string
 }

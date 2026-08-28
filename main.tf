@@ -16,10 +16,12 @@ provider "aws" {
 module "webapp" {
   source = "./modules/webapp"
 
-  aws_region    = var.aws_region
-  instance_type = var.instance_type
-  meu_ip_cidr   = var.meu_ip_cidr
-  aluno_nome    = var.aluno_name
-  turma         = var.turma
-  project_name  = var.project_name
+  aws_region      = var.aws_region
+  instance_type   = var.instance_type
+  meu_ip_cidr     = var.meu_ip_cidr
+  aluno_nome      = var.aluno_name
+  turma           = var.turma
+  project_name    = var.project_name
+  key_name        = var.key_name
+  public_key_path = var.public_key_path
 }

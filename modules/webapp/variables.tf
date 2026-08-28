@@ -27,3 +27,11 @@ variable "instance_type" {
   description = "Tipo de instancia EC2 a ser criada."
   type        = string
 }
+
+variable "key_name" {
+  type = string
+}
+
+variable "public_key_path" {
+  type = string
+}
