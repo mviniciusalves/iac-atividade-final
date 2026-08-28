@@ -23,4 +23,8 @@ pos-devops-iac-tfstate-marcos
 
    terraform destroy
 
+#Ansible
+
+Inventário estático
+Se a instância for recriada e o IP mudar, atualize o endereço em ansible/inventory.ini.
 ---
