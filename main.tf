@@ -6,7 +6,15 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
+    http = {
+      source  = "hashicorp/http"
+      version = ">= 3.0.0"
+    }
   }
+}
+
+data "http" "my_ip" {
+  url = "https://checkip.amazonaws.com"
 }
 
 provider "aws" {
@@ -18,7 +26,7 @@ module "webapp" {
 
   aws_region      = var.aws_region
   instance_type   = var.instance_type
-  meu_ip_cidr     = var.meu_ip_cidr
+  meu_ip_cidr     = var.meu_ip_cidr == "" ? "${chomp(data.http.my_ip.response_body)}/32" : var.meu_ip_cidr
   aluno_nome      = var.aluno_name
   turma           = var.turma
   project_name    = var.project_name

@@ -10,9 +10,9 @@ variable "instance_type" {
 }
 
 variable "meu_ip_cidr" {
-  description = "CIDR do seu IP publico, no formato IP/32, autorizado a acessar a porta 22"
+  description = "CIDR do seu IP publico, no formato IP/32, autorizado a acessar a porta 22. Deixe vazio para usar o IP atual automaticamente."
   type        = string
-  default     = "192.168.1.1/32"
+  default     = ""
 }
 
 variable "aluno_name" {

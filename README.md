@@ -39,8 +39,6 @@ O Terraform cria a VPC, subnet pública, Internet Gateway, Security Group, chave
 
 No diretório `ansible`, o inventário dinâmico é: inventory.aws_ec2.yml
 
-```
-
 Execute o playbook:
 
 ```bash
