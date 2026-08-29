@@ -58,7 +58,7 @@ A variável sensível simulada está protegida no arquivo `ansible/vault.yml`.
 curl http://IP_PUBLICO_DA_EC2:3000
 ```
 
-A segunda execução do Ansible foi idempotente:
+Execute novamente o playbook para ver segunda execução idempotente:
 
 ```text
 changed=0
