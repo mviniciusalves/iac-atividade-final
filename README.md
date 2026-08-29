@@ -1,4 +1,4 @@
-# Projeto Final: Terraform + Ansible
+*# Projeto Final: Terraform + Ansible
 
 Projeto para provisionamento e configuração de uma aplicação Docker na AWS.
 
@@ -9,6 +9,8 @@ Terraform → EC2 → Ansible via SSH → Docker → Aplicação na porta 3000
 ```
 
 ## Terraform
+
+*Antes de iniciar, ajuste as credenciais com comando: "aws configure" ou diretamente no arquivo .aws/credentials. 
 
 Inicializar:
 
@@ -36,18 +38,15 @@ O Terraform cria a VPC, subnet pública, Internet Gateway, Security Group, chave
 
 ## Ansible
 
-Após o `terraform apply`, atualize o IP da EC2 (Ver em Outputs) em `ansible/inventory.ini`:
+No diretório `ansible`, o inventário dinâmico é: inventory.aws_ec2.yml
 
-```ini
-[web]
-app ansible_host=IP_PUBLICO_DA_EC2
 ```
 
 Execute o playbook:
 
 ```bash
 cd ansible
-ansible-playbook -i inventory.ini playbook.yml --ask-vault-pass
+ansible-playbook -i inventory.aws_ec2.yml playbook.yml --ask-vault-pass
 ```
 Vault password enviada via comentário privado no Classroom.
 O Ansible instala o Docker e executa o container `getting-started-app`, mapeando a porta `3000` da EC2 para a porta `80` do container.

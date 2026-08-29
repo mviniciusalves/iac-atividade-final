@@ -1,6 +1,6 @@
 ---
 - name: Configurar servidor da aplicação
-  hosts: web
+  hosts: aws_ec2
   become: true
 
   vars_files:
