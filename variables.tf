@@ -30,11 +30,13 @@ variable "project_name" {
   default = "getting-started-app"
 }
 variable "key_name" {
-  description = "getting-started-app"
+  description = "Nome da chave SSH da instância EC2."
   type        = string
+  default     = "getting-started-app"
 }
 
 variable "public_key_path" {
-  description = "/home/marcos/.ssh/getting-started-app.pub"
+  description = "Caminho da chave pública SSH local."
   type        = string
+  default     = "/home/marcos/.ssh/getting-started-app.pub"
 }

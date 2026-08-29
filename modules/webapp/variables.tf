@@ -29,9 +29,13 @@ variable "instance_type" {
 }
 
 variable "key_name" {
-  type = string
+  description = "Nome da chave SSH da instância EC2."
+  type        = string
+  default     = "getting-started-app"
 }
 
 variable "public_key_path" {
-  type = string
+  description = "Caminho da chave pública SSH local."
+  type        = string
+  default     = "/home/marcos/.ssh/getting-started-app.pub"
 }

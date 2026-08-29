@@ -1,4 +1,4 @@
-*# Projeto Final: Terraform + Ansible
+# Projeto Final: Terraform + Ansible
 
 Projeto para provisionamento e configuração de uma aplicação Docker na AWS.
 
@@ -22,7 +22,6 @@ Criar os ambientes:
 
 ```bash
 terraform workspace new dev
-terraform workspace new prod
 terraform workspace select dev
 ```
 
